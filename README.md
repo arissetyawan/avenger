@@ -13,7 +13,7 @@ Jadi Untuk Teman - Teman Bisa Menyesuaikan Yah :)
 Untuk URL Bisa Di Tulis Disini Untuk Mempermudah Saat Develope
 ---------------------------------------------------------------
 
---- Order ---
+ORDER
 
 URL Untuk Order         : http://localhost:8080/jsp/Orders?action=order
 URL Untuk Order Detail  :
