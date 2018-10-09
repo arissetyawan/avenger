@@ -5,18 +5,25 @@
         <group>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/controller/FeedbacksController.java</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/controller/OrdersController.java</file>
-            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/Orders/orderView.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/index.html</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/people/search.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/people/edit.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/model/Utama.java</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/Orders/orderConfirm.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/people/form.html</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/menu.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/controller/PeopleController.java</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/model/Order.java</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/assets/vendor/bootstrap/css/bootstrap.css</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/nbproject/build-impl.xml</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/model/Person.java</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/people/list.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/people/new.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/src/java/model/MyConnection.java</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/Orders/orderDetail.jsp</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/Orders/orderMyCart.jsp</file>
             <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/WEB-INF/web.xml</file>
+            <file>file:/F:/KULIAH/SEMESTER%205/oop2/demo/jsp/web/Orders/order.jsp</file>
         </group>
     </open-files>
 </project-private>
