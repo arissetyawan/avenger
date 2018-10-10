@@ -9,18 +9,20 @@ Tapi Disertakan Assets Barangkali Ada Yang Ingin Menggunakan DataTable Untuk Mem
 
 Jadi Untuk Teman - Teman Bisa Menyesuaikan Yah :)
 
-<<<<<<< HEAD
 # Untuk URL Bisa Di Tulis Disini Untuk Mempermudah Saat Develope
-=======
----------------------------------------------------------------
-Untuk URL Bisa Di Tulis Disini Untuk Mempermudah Saat Develope
----------------------------------------------------------------
-
-ORDER
->>>>>>> dd442df42bfdeaa366f0f4640df6aca4cba8ff1e
 
 # Order
+<<<<<<< HEAD
 URL Untuk Order         : http://localhost:8080/jsp/Orders?action=order
 URL Untuk Order Detail  : http://localhost:8080/jsp/Orders?action=orderDetail
 URL Untuk Order MyCart  :
 URL Untuk Order Confirm :
+=======
+URL Untuk Order           : http://localhost:8080/jsp/Orders?action=order
+
+URL Untuk Order Detail    :
+
+URL Untuk Order MyCart    :
+
+URL Untuk Order Confirm   :
+>>>>>>> 24f6ea67d00a5035cec1e9e0b39296f5a2e9a193
