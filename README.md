@@ -21,6 +21,6 @@ ORDER
 
 # Order
 URL Untuk Order         : http://localhost:8080/jsp/Orders?action=order
-URL Untuk Order Detail  :
+URL Untuk Order Detail  : http://localhost:8080/jsp/Orders?action=orderDetail
 URL Untuk Order MyCart  :
 URL Untuk Order Confirm :
