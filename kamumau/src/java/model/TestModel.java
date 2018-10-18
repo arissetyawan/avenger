@@ -27,10 +27,11 @@ public class TestModel{
         o.initOrCeate(21);
         o.find(5);
         */
-        Category cat = new Category();
-        cat.setName("Category B");
-        cat.create();
-        System.out.println(cat.all());
-
+       Product p= new Product();
+        p.find(1);
+        p.setName("Micin");
+        p.create();
+        System.out.println(p);
+        System.out.println(p.all());
     }
 }

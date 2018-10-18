@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="people?action=new">Home</a>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
@@ -24,7 +24,7 @@
         </div>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Products</a>
+        <a class="nav-link" href="products?action=list">Products</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Sign In</a>
