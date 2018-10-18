@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<link href="/WEB-INF/stylesheets/jumbotron.css" rel="stylesheet">
+<center>
+<table>  
+<tr><td>Category:</td>
+    <td><select name="category" style="width:155px">  
+        <option>Drink</option>  
+        <option>Food</option>   
+        </select>  
+        </td></tr>   
+<tr><td>Name:</td>
+    <td><input type="text" name="name" value="<c:out value='${product.getName()}' />"/></td></tr>  
+<tr><td>Price:</td>
+    <td><input type="text" name="price" value="<c:out value='${product.getPrice()}' />"/></td></tr>  
+<tr><td>Stock:</td>
+    <td><input type="text" name="stock" value="<c:out value='${product.getStock()}' />"/></td></tr>
+
+
+
+</table>
+    <center><tr><td colspan="2"><input type="submit"  <button class="btn btn-sm btn-primary" value="Save"/></td>
+    <a href="products?action=list"><button class="btn btn-sm btn-primary">List Of Product</button></a></h1></tr> 
+     </center>
+</center>

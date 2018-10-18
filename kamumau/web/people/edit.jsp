@@ -11,9 +11,9 @@
   <head><title>People MVC JSP Bean Application</title></head>
 
     <body>
-        <h1>Editing Person | <a href="people?action=list">List of People</a></h1>
+        <h1>Editing Person Orang | <a href="people?action=list">List of People</a></h1>
             <h4><c:out value='${message}' /></h4>
-        <form action="/jsp/people?action=update&id=<c:out value='${person.getId()}' />" method="post"> 
+        <form action="people?action=update&id=<c:out value='${person.getId()}' />" method="post"> 
         <%@include file= "form.html" %>
         </form>
     </body>

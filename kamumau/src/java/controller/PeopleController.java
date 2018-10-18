@@ -137,7 +137,7 @@ public class PeopleController extends HttpServlet {
             request.getRequestDispatcher("/people/list.jsp").include(request, response);
         }
         else{
-            message= "person failed to updated";     
+            message= "gagal";     
             request.setAttribute("message", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("people?action="+ edit_action);
             dispatcher.forward(request, response);

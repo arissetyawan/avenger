@@ -16,7 +16,7 @@
     <meta name="author" content="aris">
     <link rel="icon" href="favicon.ico">
 
-    <title>KamuMau - sell or buy as you want</title>
+    <title>KamuMau - Welcome</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
