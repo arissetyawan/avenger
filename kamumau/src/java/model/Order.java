@@ -18,11 +18,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Order extends MyConnection{
     private final String tableName= "orders";
     private final String tableTransaction= "transactions";
     public int no;
+    public String name;
     public int user_id;
     public Date created_at;
     public Date updated_at;
@@ -45,6 +47,11 @@ public class Order extends MyConnection{
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public int getNo() {
@@ -86,6 +93,7 @@ public class Order extends MyConnection{
             while (res.next()) {
                 Order order = new Order();
                 order.setNo(res.getInt("no"));
+                order.setName(res.getString("name"));
                 order.setCreatedAt(res.getDate("created_at"));
                 order.setUpdatedAT(res.getDate("updated_at"));
                 order.setId(res.getInt("id"));
@@ -155,6 +163,7 @@ public class Order extends MyConnection{
             if (res.next()) {
                 order.setId(res.getInt("id"));
                 order.setNo(res.getInt("no"));
+                order.setName(res.getString(status));
                 order.setCreatedAt(res.getDate("created_at"));
                 order.setUpdatedAT(res.getDate("updated_at"));
             }
