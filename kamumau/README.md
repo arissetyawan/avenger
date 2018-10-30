@@ -15,8 +15,12 @@ Jadi Untuk Teman - Teman Bisa Menyesuaikan Yah :)
 
 URL Untuk Order           : http://localhost:8080/jsp/Orders?action=order
 
-URL Untuk Order Detail    :
+URL Untuk Order Detail    : 
 
 URL Untuk Order MyCart    :
 
 URL Untuk Order Confirm   :
+
+# Feedback
+
+URL Untuk Coba Feedback   : http://localhost:53062/kamumau/feedbacks?action=new
