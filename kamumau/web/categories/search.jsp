@@ -13,7 +13,7 @@
 <div class="container">
   <div class="jumbotron">
       
-      <form method="post" action="categories?action=search" style="margin-top: 50px;">
+      <form method="post" action="/kamumau/categories?action=search" style="margin-top: 50px;">
           <h2>Kata Kunci</h2>
             <input type="text" name="keyword" value=""/>
             <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Search"/>
