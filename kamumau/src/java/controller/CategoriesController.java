@@ -32,6 +32,14 @@ public class CategoriesController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    
+    private final static String ADD_ACTION = "new";
+    private final static String DELETE_ACTION = "delete";
+    private final static String EDIT_ACTION = "edit";
+    private final static String LIST_ACTION = "list";
+   // private final static String SEARCH_ACTION = "search";
+    private String message = "";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -43,14 +51,22 @@ public class CategoriesController extends HttpServlet {
                 try {
                     switch (action) {
                     case "new":
+                        showNewForm(request, response);
                         break;
                     case "create":
+                        addCategory(request, response);
                         break;
                     case "delete":
+                        deleteCategory(request, response);
                         break;
                     case "edit":
+                        showEditForm(request, response);
                         break;
                     case "update":
+                        updateCategory(request, response);
+                        break;
+                    case "search":
+                        searchCategory(request, response);
                         break;
                     default:
                         listCategories(request, response);
@@ -73,6 +89,106 @@ public class CategoriesController extends HttpServlet {
         dispatcher.forward(request, response);
         
     }
+    
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException{
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories/new.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void addCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException{
+        
+        String name = request.getParameter("name");
+        String parentCategory = request.getParameter("parent_category");
+        String description = request.getParameter("description");
+        
+        Category category = new Category();
+        category.setName(name);
+        category.setParentCategory(parentCategory);
+        category.setDescription(description);
+        
+        if(category.insert()){
+            message = "new Category Added";
+            request.setAttribute("message : ", message);
+            response.sendRedirect("categories?action="+LIST_ACTION);
+                    
+        }else{
+            message = "new category failed to add";
+            request.setAttribute("message : ", message);
+            request.getRequestDispatcher("categorie?action="+ADD_ACTION).include(request, response);
+        }
+        
+    }
+    private void deleteCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+ 
+        Category category = new Category();
+        category.setId(id);
+        if(category.delete()){
+            message= "category deleted";                    
+        }
+        else{
+            message= "category was not deleted";                
+        }    
+        request.setAttribute("message", message);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories?action="+LIST_ACTION);
+        dispatcher.forward(request, response);
+
+//        response.sendRedirect("people?action="+list_action); 
+    }
+    
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            Category category = new Category();
+            int id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("category", category.find(id));
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("categories/edit.jsp");
+            dispatcher.forward(request, response);
+        }
+    
+   private void updateCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String parentCategory = request.getParameter("parent_category");
+        String description = request.getParameter("description");
+        
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+        category.setParentCategory(parentCategory);
+        category.setDescription(description);
+        if (category.update()){
+            message= "category updated";     
+            request.setAttribute("message", message);
+            List<Category> categories = category.all();
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("/categories/list.jsp").include(request, response);
+        }
+        else{
+            message= "category failed to updated";     
+            request.setAttribute("message", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("categories?action="+ EDIT_ACTION);
+            dispatcher.forward(request, response);
+        }
+  
+    }
+    private void searchCategory(HttpServletRequest request, HttpServletResponse response) 
+            throws SQLException, IOException, ServletException {
+        String name = request.getParameter("keyword");
+        Category category= new Category();
+        Category c= new Category();
+        List<Category> categories = c.search(name);
+        request.setAttribute("categories", categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories/list.jsp");
+        dispatcher.forward(request, response);
+        
+    }
+            
+            
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -111,5 +227,7 @@ public class CategoriesController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+   
 
 }
