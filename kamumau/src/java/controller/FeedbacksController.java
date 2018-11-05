@@ -8,6 +8,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,17 +69,7 @@ public class FeedbacksController extends HttpServlet {
         }
     }
 
-    private void listFeedback(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        Feedback p = new Feedback();
-        int seller_id = Integer.parseInt(request.getParameter("seller_id"));
-        List<Feedback> feedbacks = p.all(seller_id);
-        request.setAttribute("feedbacks", feedbacks);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/list.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void createFeedback(HttpServletRequest request, HttpServletResponse response)
+        private void createFeedback(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int rating = Integer.parseInt(request.getParameter("rating"));
         String content = request.getParameter("content");
@@ -86,6 +78,9 @@ public class FeedbacksController extends HttpServlet {
         List<Feedback> feedbacks = fb.getData(order_id);
         int seller_id = feedbacks.get(0).getSeller_Id();
         int buyer_id = feedbacks.get(0).getBuyer_Id();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
         /*HttpSession session = request.getSession();
         String buyer_id = (session.getAttribute("current_user").toString());*/
 
@@ -95,6 +90,7 @@ public class FeedbacksController extends HttpServlet {
         feedback.setOrder_Id(order_id);
         feedback.setSeller_Id(seller_id);
         feedback.setBuyer_Id(buyer_id);
+        feedback.setDate(date);
         if (feedback.create()) {
             message = "new feedback added";
             request.setAttribute("message", message);
@@ -104,6 +100,16 @@ public class FeedbacksController extends HttpServlet {
             request.setAttribute("message", message);
             request.getRequestDispatcher("feedbacks?action=" + add_action).include(request, response);
         }
+    }
+        
+    private void listFeedback(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        Feedback p = new Feedback();
+        int seller_id = Integer.parseInt(request.getParameter("seller_id"));
+        List<Feedback> feedbacks = p.all(seller_id);
+        request.setAttribute("feedbacks", feedbacks);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/list.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -147,6 +153,12 @@ public class FeedbacksController extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Feedback fb = new Feedback();
+        int order_id = Integer.parseInt(request.getParameter("order_id"));
+        List<Feedback> feedback = fb.getData(order_id);
+        int seller_id = feedback.get(0).getSeller_Id();
+        List<Feedback> feedbacks = fb.all(seller_id);
+        request.setAttribute("feedbacks", feedbacks);
         RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/new.jsp");
         dispatcher.forward(request, response);
     }

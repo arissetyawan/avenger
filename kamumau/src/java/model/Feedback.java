@@ -30,6 +30,10 @@ public class Feedback extends MyConnection{
     public int seller_id;
     public int buyer_id;
     public int order_no;
+    public String full_name;
+    public String address;
+    public String status;
+    public String date;
 
     public Feedback() {
         super();
@@ -90,6 +94,38 @@ public class Feedback extends MyConnection{
         this.order_no = order_no;
     }
     
+    public String getFull_Name() {
+        return full_name;
+    }
+
+    public void setFull_Name(String full_name) {
+        this.full_name = full_name;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
     public boolean create() {
         boolean result;
         if(!validate()){
@@ -97,9 +133,9 @@ public class Feedback extends MyConnection{
         }
         
         String query = "INSERT INTO "+ tableName +"(rating, content, order_id, "
-                + "seller_id, buyer_id) values ('" + this.rating + "', '" + 
+                + "seller_id, buyer_id, created_at) values ('" + this.rating + "', '" + 
                 this.content + "', '" + this.order_id + "', '" + this.seller_id + 
-                "', '" + this.buyer_id + "')";
+                "', '" + this.buyer_id + "', '" + this.date + "')";
         try {
             result= this.stateOpen().executeUpdate(query) > 0;
             this.stateClose();
@@ -140,18 +176,26 @@ public class Feedback extends MyConnection{
     }
     
     public ArrayList<Feedback> all(int seller_id){
-        String query = "SELECT * FROM " + tableName + " WHERE seller_id = " + seller_id;
+        String query = "SELECT user.full_name, user.address, orders.order_no, "
+                + "orders.status, feedbacks.* from feedbacks INNER JOIN orders ON "
+                + "feedbacks.order_id = orders.id INNER JOIN user ON orders.seller_id "
+                + "= user.id WHERE orders.seller_id & user.id & feedbacks.seller_id = " + seller_id;
         ArrayList<Feedback> feedbacks = new ArrayList<>();
         try {
             Statement stmt = this.conn().createStatement();
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Feedback feedback = new Feedback();
+                feedback.setFull_Name(res.getString("full_name"));
+                feedback.setAddress(res.getString("address"));
+                feedback.setOrder_No(res.getInt("order_no"));
+                feedback.setStatus(res.getString("status"));
                 feedback.setRating(res.getInt("rating"));
                 feedback.setContent(res.getString("content"));
                 feedback.setOrder_Id(res.getInt("order_id"));
                 feedback.setSeller_Id(res.getInt("seller_id"));
                 feedback.setBuyer_Id(res.getInt("buyer_id"));
+                feedback.setDate(res.getString("created_at"));
                 feedback.setId(res.getInt("id"));
                 feedbacks.add(feedback);
             }

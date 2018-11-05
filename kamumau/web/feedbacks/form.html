@@ -2,10 +2,11 @@
     <!-- Card for seller's info -->
     <div class="card text-white bg-primary mb-3">
         <div class="card-header" style="font-weight:bold;">
-            Seller : PT. TokoLaku 
+            <c:forEach begin="0" end="0" var="fb" items="${feedbacks}">
+                <h3><c:out value="${fb.full_Name}" /></h3>
         </div>
         <div class="card-body">
-            <p class="card-text">Address : Jalan Belok Kanan No. 212 - Jakarta</p>
+            <p class="card-text"><c:out value="${fb.address}" /></p>
             <p class="card-text">Cancelled: 10, Delivered: 120</p>
         </div>
     </div>
@@ -19,6 +20,13 @@
         </div>
         <div class="card-body">
            <blockquote class="blockquote mb-0">
+               <div class="form-group row">
+                <label for="disabledInput" class="col-sm-2 control-label">Order No.</label>
+                <div class="col-sm-10">
+                    <input class="form-control"s id="order_no" type="text" value="<c:out value='${fb.order_No}' />" disabled>
+                </div> 
+                </c:forEach>
+              </div>
                <!-- This order_id value is gotten from URL parameter uses JavaScript -->
               <div>
                 <input type="hidden" id="order_id" name="order_id"/>
@@ -28,12 +36,6 @@
                     var value = url.get("order_id");
                     document.getElementById('order_id').value = value;
                </script>
-              <div class="form-group row">
-                <label for="disabledInput" class="col-sm-2 control-label">Order No.</label>
-                <div class="col-sm-10">
-                    <input class="form-control"s id="order_no" type="text" value="134340" disabled>
-                </div> 
-              </div>
               <div class="form-group row">
                 <label for="sel1" class="col-sm-2 control-label">Rate : </label>
                 <input type="hidden" id="rating" name="rating" />

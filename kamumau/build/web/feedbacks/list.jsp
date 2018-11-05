@@ -3,6 +3,8 @@
     Created on : Oct 17, 2018, 7:00:55 AM
     Author     : Putrialutfi
 --%>
+<%@page import="java.util.List"%>
+<%@page import="model.Feedback"%>
 <%@page language= "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -20,22 +22,22 @@
         <form>
     <div class="card text-white bg-primary mb-3">
         <div class="card-header" style="font-weight:bold;">
-            Seller : PT. TokoLaku 
+            <c:forEach begin="0" end="0" var="fb" items="${feedbacks}">
+            <h3><c:out value="${fb.full_Name}" /></h3>
         </div>
         <div class="card-body">
-            <p class="card-text">Address : Jalan Belok Kanan No. 212 - Jakarta</p>
+            <p class="card-text"><c:out value="${fb.address}" /></p>
             <p class="card-text">Cancelled: 10, Delivered: 120</p>
         </div>
+            </c:forEach>
     </div>
         </form>
-    
+            <c:forEach var="feedback" items="${feedbacks}">
         <div align="center">
             <h4><c:out value='${message}' /></h4>
-            <c:forEach var="feedback" items="${feedbacks}">
                 <div style="text-align: left">
-                    <c:out value="${feedback.rating}"/><span>/5   </span><c:out value="${feedback.content}" />
+                    <c:out value="${feedback.rating}"/><span>/5   ( <c:out value="${feedback.date}" />  )<br></span><c:out value="${feedback.content}" />
                 </div>
-                <br>
             </c:forEach>
         </div>    
 </main>  
