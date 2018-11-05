@@ -23,4 +23,4 @@ URL Untuk Order Confirm   :
 
 # Feedback
 
-URL Untuk Coba Feedback   : http://localhost:53062/kamumau/feedbacks?action=new&order=1(value menyesuaikan data di database pada tabel order)
+URL Untuk Coba Feedback   : http://localhost:53062/kamumau/feedbacks?action=new&order=1 (value menyesuaikan data di database pada tabel order)
