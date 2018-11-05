@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  CREATE TABLE `feedback` (
@@ -22,12 +23,13 @@ import java.util.ArrayList;
 * url to create http://localhost:53062/kamumau/feedbacks?action=new
  */
 public class Feedback extends MyConnection{
-    private final String tableName= "feedback";
-    public String rating;
+    private final String tableName= "feedbacks";
+    public int rating;
     public String content;
-    public String order_id;
-    public String seller_id;
-    public String buyer_id;
+    public int order_id;
+    public int seller_id;
+    public int buyer_id;
+    public int order_no;
 
     public Feedback() {
         super();
@@ -40,11 +42,11 @@ public class Feedback extends MyConnection{
         this.id = id;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -56,28 +58,36 @@ public class Feedback extends MyConnection{
         this.content = content;
     }
 
-    public String getOrder_Id() {
+    public int getOrder_Id() {
         return order_id;
     }
 
-    public void setOrder_Id(String order_id) {
+    public void setOrder_Id(int order_id) {
         this.order_id = order_id;
     }
     
-    public String getSeller_Id() {
+    public int getSeller_Id() {
         return seller_id;
     }
 
-    public void setSeller_Id(String seller_id) {
+    public void setSeller_Id(int seller_id) {
         this.seller_id = seller_id;
     }
     
-    public String getBuyer_Id() {
+    public int getBuyer_Id() {
         return buyer_id;
     }
 
-    public void setBuyer_Id(String buyer_id) {
+    public void setBuyer_Id(int buyer_id) {
         this.buyer_id = buyer_id;
+    }
+    
+    public int getOrder_No() {
+        return order_no;
+    }
+
+    public void setOrder_No(int order_no) {
+        this.order_no = order_no;
     }
     
     public boolean create() {
@@ -108,36 +118,47 @@ public class Feedback extends MyConnection{
         return status;
     }
     
-    public boolean delete() {
-        String query = "DELETE FROM " + tableName + " WHERE id = " + this.id + " ";
+    public ArrayList<Feedback> getData(int order_id){
+        String queryGetSeller = "SELECT orders.order_no, orders.seller_id, orders.buyer_id "
+                + "FROM "+ tableName +" INNER JOIN orders ON "+ tableName +".order_id = "
+                + "orders.id WHERE order_id = " + order_id;
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
         try {
             Statement stmt = this.conn().createStatement();
-            return stmt.executeUpdate(query) > 0;
+            ResultSet res = stmt.executeQuery(queryGetSeller);
+            while (res.next()) {
+                Feedback feedback = new Feedback();
+                feedback.setOrder_No(res.getInt("order_no"));
+                feedback.setSeller_Id(res.getInt("seller_id"));
+                feedback.setBuyer_Id(res.getInt("buyer_id"));
+                feedbacks.add(feedback);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
         }
+        return feedbacks;
     }
-
-    public ArrayList<Feedback> all(){
-        String query = "SELECT * FROM " + tableName;
-        ArrayList<Feedback> feedbacker = new ArrayList<>();
+    
+    public ArrayList<Feedback> all(int seller_id){
+        String query = "SELECT * FROM " + tableName + " WHERE seller_id = " + seller_id;
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
         try {
             Statement stmt = this.conn().createStatement();
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Feedback feedback = new Feedback();
-                feedback.setRating(res.getString("rating"));
+                feedback.setRating(res.getInt("rating"));
                 feedback.setContent(res.getString("content"));
-                feedback.setOrder_Id(res.getString("order_id"));
-                feedback.setSeller_Id(res.getString("seller_id"));
-                feedback.setBuyer_Id(res.getString("buyer_id"));
+                feedback.setOrder_Id(res.getInt("order_id"));
+                feedback.setSeller_Id(res.getInt("seller_id"));
+                feedback.setBuyer_Id(res.getInt("buyer_id"));
                 feedback.setId(res.getInt("id"));
-                feedbacker.add(feedback);
+                feedbacks.add(feedback);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return feedbacker;
+        return feedbacks;
     }
+
 }

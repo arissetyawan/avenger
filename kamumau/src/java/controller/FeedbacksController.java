@@ -23,14 +23,12 @@ import model.Person;
  *
  * @author x201
  */
-
 public class FeedbacksController extends HttpServlet {
+
     private final static String add_action = "new";
-    private final static String delete_action = "delete";
-    private final static String edit_action = "edit";
     private final static String list_action = "list";
-    private String message= "";
-    
+    private String message = "";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,13 +43,13 @@ public class FeedbacksController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         session.setAttribute("current_user", 1);
-            try (PrintWriter out = response.getWriter()) {
-                String action = request.getParameter("action");
-                if(action==null){
-                    action= "list";
-                }
-                try {
-                    switch (action) {
+        try (PrintWriter out = response.getWriter()) {
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "list";
+            }
+            try {
+                switch (action) {
                     case "new":
                         //mustLoggedIn(request, response);
                         showNewForm(request, response);
@@ -59,58 +57,55 @@ public class FeedbacksController extends HttpServlet {
                     case "create":
                         createFeedback(request, response);
                         break;
-                    case "delete":
-                        deleteFeedback(request, response);
-                        break;
                     default:
                         listFeedback(request, response);
                         break;
-                    }
-                } 
-            catch (SQLException ex) {
+                }
+            } catch (SQLException ex) {
                 throw new ServletException(ex);
             }
         }
     }
-    
+
     private void listFeedback(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        Feedback p= new Feedback();
-        List<Feedback> feedbacks = p.all();
+        Feedback p = new Feedback();
+        int seller_id = Integer.parseInt(request.getParameter("seller_id"));
+        List<Feedback> feedbacks = p.all(seller_id);
         request.setAttribute("feedbacks", feedbacks);
         RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/list.jsp");
         dispatcher.forward(request, response);
     }
-    
+
     private void createFeedback(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        String rating = request.getParameter("rating");
+        int rating = Integer.parseInt(request.getParameter("rating"));
         String content = request.getParameter("content");
-        /*This below made for making order_id, seller_id and buyer_id for a while
-        because feedback hasn't been connected with order things (to take foreign) */
-        String order_id = "2";
-        String seller_id = "2";
-        String buyer_id = "2";
+        Feedback fb = new Feedback();
+        int order_id = Integer.parseInt(request.getParameter("order_id"));
+        List<Feedback> feedbacks = fb.getData(order_id);
+        int seller_id = feedbacks.get(0).getSeller_Id();
+        int buyer_id = feedbacks.get(0).getBuyer_Id();
         /*HttpSession session = request.getSession();
         String buyer_id = (session.getAttribute("current_user").toString());*/
- 
+
         Feedback feedback = new Feedback();
         feedback.setRating(rating);
         feedback.setContent(content);
         feedback.setOrder_Id(order_id);
         feedback.setSeller_Id(seller_id);
         feedback.setBuyer_Id(buyer_id);
-        if (feedback.create()){
-            message= "new feedback added";                    
+        if (feedback.create()) {
+            message = "new feedback added";
             request.setAttribute("message", message);
-            response.sendRedirect("feedbacks?action="+list_action);
-        }
-        else{
-            message= "new feedback failed to add";
+            response.sendRedirect("feedbacks?action=" + list_action + "&seller_id=" + seller_id);
+        } else {
+            message = "new feedback failed to add";
             request.setAttribute("message", message);
-            request.getRequestDispatcher("feedbacks?action="+add_action).include(request, response);
+            request.getRequestDispatcher("feedbacks?action=" + add_action).include(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -149,27 +144,10 @@ public class FeedbacksController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/new.jsp");
-            dispatcher.forward(request, response);
-        }
 
- 
-    private void deleteFeedback(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
- 
-        Feedback feedback = new Feedback();
-        feedback.setId(id);
-        if(feedback.delete()){
-            message= "feedback deleted";                    
-        }
-        else{
-            message= "feedback was not deleted";                
-        }    
-        request.setAttribute("message", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks?action="+ list_action);
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("feedbacks/new.jsp");
         dispatcher.forward(request, response);
     }
 }
