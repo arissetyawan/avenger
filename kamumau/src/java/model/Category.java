@@ -21,9 +21,22 @@ import java.util.ArrayList;
  *
  * @author x201
  */
+
+
+//CREATE TABLE IF NOT EXISTS `categories` (
+//  `id` int(11) NOT NULL AUTO_INCREMENT,
+//  `name` varchar(30) NOT NULL,
+//  `category_id` int(11) DEFAULT '0',
+//  `description` text NOT NULL,
+//  PRIMARY KEY (`id`),
+//  UNIQUE KEY `id` (`id`)
+//) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+
 public class Category extends MyConnection {
     private String tableName="categories";
-    public String name, description, parentCategory;
+    private int category_id;
+    public String name, description;
     private String query;
   
     
@@ -52,13 +65,25 @@ public class Category extends MyConnection {
         this.description = description;
     }
 
-    public String getParentCategory() {
-        return parentCategory;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setParentCategory(String parentCategory) {
-        this.parentCategory = parentCategory;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
+
+    
+    
+    
+
+//    public String getParentCategory() {
+//        return parentCategory;
+//    }
+//
+//    public void setParentCategory(String parentCategory) {
+//        this.parentCategory = parentCategory;
+//    }
 
     public int getId() {
         return id;
@@ -80,7 +105,7 @@ public class Category extends MyConnection {
             ResultSet res = stmt.executeQuery(query);
             if (res.next()) {
                 category.setName(res.getString("name"));
-                category.setParentCategory(res.getString("parent_category"));
+                category.setCategory_id(res.getInt("category_id"));
                 category.setId(res.getInt("id"));
                 category.setDescription(res.getString("description"));
             }
@@ -92,69 +117,20 @@ public class Category extends MyConnection {
 
     private boolean validate(){
         boolean status = false;
-        if(!"".equals(this.name) && !"".equals(this.parentCategory) && !"".equals(this.description)){
+        if(!"".equals(this.name) && !"".equals(this.category_id) && !"".equals(this.description)){
             status = true;
         }
         return status;
     }
     
-    private boolean validateName(){
-        boolean status = false;
-        if(!"".equals(this.parentCategory)){
-           status = true;
-        }
-        return status;
-    }
-    
-    
-   public boolean create2() {
-        boolean result;
-        if(!validate()){
-            String query = "INSERT INTO "+ tableName +"(name, description) values ('" + this.parentCategory + "', '" + this.description + "')";
-            //return false;
-            
-        }
-        String query = "INSERT INTO "+ tableName +"(name, parent_category, description) values ('" + this.name + "', '" + this.parentCategory + "', '" + this.description + "')";
-        try {
-            result= this.stateOpen().executeUpdate(query) > 0;
-            this.stateClose();
-            return result;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean insert2(){
-        boolean result;
-        if(this.parentCategory.isEmpty()){
-            
-            String query = "INSERT INTO "+ tableName +"(name, parent_category, description) values ('" + this.name + "', null ,'" + this.description + "')";
-            
-        
-        }
-            String query = "INSERT INTO "+ tableName +"(name, parent_category, description) values ('" + this.name + "', '" + this.parentCategory + "', '" + this.description + "')";
-            
-        
-        try {
-            result= this.stateOpen().executeUpdate(query) > 0;
-            this.stateClose();
-            return result;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        
-    }
-
-    
-    
+     
     public boolean insert() {
         boolean result;
         
-          //String query = "INSERT INTO "+ tableName +"(name, description) values ('" + this.parentCategory + "', '" + this.description + "')";
-        
-       String query = "INSERT INTO "+ tableName +"(name, parent_category, description) values ('" + this.name + "', '" + this.parentCategory + "', '" + this.description + "')";
+       String query = "INSERT INTO "+ tableName +"(name, category_id, description) values ('" 
+               + this.name + "', '" 
+               + this.category_id + "', '" 
+               + this.description + "')";
         try {
             result= this.stateOpen().executeUpdate(query) > 0;
             this.stateClose();
@@ -164,6 +140,7 @@ public class Category extends MyConnection {
             return false;
         }
     }
+    
     public boolean delete() {
         String query = "DELETE FROM " + tableName + " WHERE id = " + this.id + " ";
         try {
@@ -179,8 +156,7 @@ public class Category extends MyConnection {
             return false;
         }
         String query = "UPDATE "+ tableName + " SET name='"
-        + this.name + "', parent_category='" + this.parentCategory
-        + "', description='" + this.description
+        + this.name + "', description='" + this.description
         + "' WHERE id = " + this.id + " ";
         try {
             Statement stmt = this.conn().createStatement();
@@ -190,6 +166,8 @@ public class Category extends MyConnection {
             return false;
         }
     }
+    
+    
     
 
     public ArrayList<Category> all(){
@@ -202,7 +180,7 @@ public class Category extends MyConnection {
                 Category category = new Category();
                 category.setId(res.getInt("id"));
                 category.setName(res.getString("name"));
-                category.setParentCategory(res.getString("parent_category"));
+                category.setCategory_id(res.getInt("category_id"));
                 category.setDescription(res.getString("description"));
                 categories.add(category);
             }
@@ -212,8 +190,28 @@ public class Category extends MyConnection {
         }
         return categories;
     }
-    public ArrayList<Category> search(String name){
-        String query = "SELECT name FROM " + tableName+"WHERE id like '% "+id+"%' OR name like '%"+name+"%'";
+    
+    
+    public Category Search(String name){
+        Category category = new Category();
+        String query = "SELECT * FROM " + tableName + " WHERE name = " + name + " ";
+        try {
+            Statement stmt = this.conn().createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            if (res.next()) {
+                category.setId(res.getInt("id"));
+                category.setName(res.getString("name"));
+                category.setCategory_id(res.getInt("category_id"));
+                category.setDescription(res.getString("description"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return category;
+    }
+    
+       public ArrayList<Category> search(String keyword){
+        String query = "SELECT * FROM " + tableName + " where name = '"+keyword+"'" ;
         ArrayList<Category> categories = new ArrayList<>();
         try {
             Statement stmt = this.conn().createStatement();
@@ -222,13 +220,14 @@ public class Category extends MyConnection {
                 Category category = new Category();
                 category.setId(res.getInt("id"));
                 category.setName(res.getString("name"));
-                category.setParentCategory(res.getString("parent_category"));
+                category.setCategory_id(res.getInt("category_id"));
                 category.setDescription(res.getString("description"));
+                
                 categories.add(category);
             }
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("search() : "+e.getMessage());
         }
         return categories;
     }
