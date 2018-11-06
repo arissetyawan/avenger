@@ -26,16 +26,16 @@
                         <td>Parent Category</td>
                         <td>
                             <div class="form-group">
-                                <select class="form-control" id="parent_category" name="parent_category" >
+                                <select class="form-control" id="category_id" name="category_id" >
                                     <option value="0">Select Parent Category</option>
 
                                     <%
                                         try {
                                                 
-                                                String query = "SELECT * FROM categories WHERE parent_category=0";
+                                                String query = "SELECT * FROM categories WHERE category_id=0";
                                                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                 Connection conn = DriverManager.getConnection(
-                                                "jdbc:mysql://localhost:3307/jspmvcjdbc", "root", "");
+                                                "jdbc:mysql://localhost:3306/jspmvcjdbc", "root", "");
 
                                                 Statement stmt  = conn.createStatement();
                                                 ResultSet rs = stmt.executeQuery(query);

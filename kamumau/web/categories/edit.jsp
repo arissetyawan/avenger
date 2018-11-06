@@ -17,47 +17,22 @@
 
         <div class="container">
             <h1>Edit Category</h1>            
-
+            <h4><c:out value='${message}' /></h4>
             <form action="/kamumau/categories?action=update&id=<c:out value='${category.getId()}' />" method="post"> 
                 
                 <table class="table">  
-                    
+
                     <tr>
                         <td>Parent Category</td>
-                        <c:out value='${category.getParentCategory()}' />
                         <td>
                             <div class="form-group">
-                                <select class="form-control" id="parent_category" name="parent_category"  disabled="true">
-                                    <option value="<c:out value='${category.getParentCategory()}' />"><c:out value='${category.getName()}' />select</option>
-
-                                    <%
-                                        try {
-                                                
-                                                String query = "SELECT * FROM categories WHERE parent_category=0";
-                                                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                Connection conn = DriverManager.getConnection(
-                                                "jdbc:mysql://localhost:3307/jspmvcjdbc", "root", "");
-
-                                                Statement stmt  = conn.createStatement();
-                                                ResultSet rs = stmt.executeQuery(query);
-
-                                                while (rs.next()) {                                
-                                                    %>
-                                                        <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
-                                                    <%
-                                                }
-
-                                            } catch (Exception ex) {
-                                                ex.printStackTrace();
-                                                System.out.println("error"+ex.getMessage());
-                                            }
-                                    %>
-                                </select>
+                                <input class="form-control" disabled="true" type="text" id="category_id" name="category_id" value="<c:out value='${category.getCategory_id()}' />"/>
                             </div>
                         </td>
                     </tr>
                     
                     <tr>
+                        
                         <td>Name Category</td>
                         <td>
                             <div class="form-group">
@@ -65,7 +40,7 @@
                             </div>
                         </td>
                     </tr>  
-
+                    
                     
                     <tr>
                         <td>Description</td>
