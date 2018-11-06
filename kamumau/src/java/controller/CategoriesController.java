@@ -100,12 +100,12 @@ public class CategoriesController extends HttpServlet {
             throws SQLException, IOException, ServletException{
         
         String name = request.getParameter("name");
-        String parentCategory = request.getParameter("parent_category");
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
         String description = request.getParameter("description");
         
         Category category = new Category();
         category.setName(name);
-        category.setParentCategory(parentCategory);
+        category.setCategory_id(category_id);
         category.setDescription(description);
         
         if(category.insert()){
@@ -116,7 +116,7 @@ public class CategoriesController extends HttpServlet {
         }else{
             message = "new category failed to add";
             request.setAttribute("message : ", message);
-            request.getRequestDispatcher("categorie?action="+ADD_ACTION).include(request, response);
+            request.getRequestDispatcher("categories?action="+ADD_ACTION).include(request, response);
         }
         
     }
@@ -149,24 +149,35 @@ public class CategoriesController extends HttpServlet {
             dispatcher.forward(request, response);
         }
     
+    private void searchCategory (HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        Category c= new Category();
+        String keyword = request.getParameter("keyword");
+        System.out.println("category"+keyword);
+        List<Category> categories = c.search(keyword);
+        request.setAttribute("categories", categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categories/search.jsp");
+        dispatcher.forward(request, response);
+        
+    }
+    
    private void updateCategory(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String parentCategory = request.getParameter("parent_category");
+        
         String description = request.getParameter("description");
         
         Category category = new Category();
         category.setId(id);
         category.setName(name);
-        category.setParentCategory(parentCategory);
         category.setDescription(description);
         if (category.update()){
             message= "category updated";     
             request.setAttribute("message", message);
             List<Category> categories = category.all();
             request.setAttribute("categories", categories);
-            request.getRequestDispatcher("/categories/list.jsp").include(request, response);
+            request.getRequestDispatcher("categories?action="+LIST_ACTION).include(request, response);
         }
         else{
             message= "category failed to updated";     
@@ -176,17 +187,8 @@ public class CategoriesController extends HttpServlet {
         }
   
     }
-    private void searchCategory(HttpServletRequest request, HttpServletResponse response) 
-            throws SQLException, IOException, ServletException {
-        String name = request.getParameter("keyword");
-        Category category= new Category();
-        Category c= new Category();
-        List<Category> categories = c.search(name);
-        request.setAttribute("categories", categories);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("categories/list.jsp");
-        dispatcher.forward(request, response);
-        
-    }
+   
+
             
             
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
