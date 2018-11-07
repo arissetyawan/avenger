@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -49,7 +50,7 @@ public class MyConnection {
             System.out.println("Connecting...");
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             this.conn= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/jspmvcjdbc", "root", "root");
+                    "jdbc:mysql://localhost:3306/jspmvcjdbcA", "root", "");
             System.out.println("Connected");
         } catch (SQLException ex) {
             Logger.getLogger(MyConnection.class.getName()).log(Level.SEVERE, null, ex);
