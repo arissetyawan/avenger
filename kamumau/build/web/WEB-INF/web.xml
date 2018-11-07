@@ -4,34 +4,65 @@
         <servlet-name>PeopleController</servlet-name>
         <servlet-class>controller.PeopleController</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>CategoriesController</servlet-name>
         <servlet-class>controller.CategoriesController</servlet-class>
     </servlet>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     <servlet>
         <servlet-name>OrdersController</servlet-name>
         <servlet-class>controller.OrdersController</servlet-class>
     </servlet>
+<<<<<<< HEAD
     <servlet>
         <servlet-name>ProductsController</servlet-name>
         <servlet-class>controller.ProductsController</servlet-class>
     </servlet>
+=======
+    
+=======
+     <servlet>
+        <servlet-name>ProductsController</servlet-name>
+        <servlet-class>controller.ProductsController</servlet-class>
+    </servlet>
+>>>>>>> 0e273152806811b23737656b42cf55d2fbf314c1
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     <servlet-mapping>
         <servlet-name>PeopleController</servlet-name>
         <url-pattern>/people</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>CategoriesController</servlet-name>
         <url-pattern>/categories</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     <servlet-mapping>
         <servlet-name>OrdersController</servlet-name>
         <url-pattern>/orders</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+=======
+    
+=======
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
      <servlet-mapping>
         <servlet-name>ProductsController</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+=======
+>>>>>>> 0e273152806811b23737656b42cf55d2fbf314c1
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     <session-config>
         <session-timeout>
             30

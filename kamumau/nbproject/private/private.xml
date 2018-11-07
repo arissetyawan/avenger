@@ -1,11 +1,56 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/media/muh_athfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/avenger/kamumau/src/java/model/Order.java</file>
             <file>file:/media/muh_athfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/avenger/kamumau/src/java/controller/OrdersController.java</file>
             <file>file:/media/muh_athfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/avenger/kamumau/web/orders/orderCompleted.jsp</file>
+=======
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/model/Person.java</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/web/people/list.jsp</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/model/Order.java</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/web/orders/list.jsp</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/controller/OrdersController.java</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/controller/ProductsController.java</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/controller/PeopleController.java</file>
+            <file>file:/media/atfal/ENTERTAINMENT/KULIAH/SEMESTER%205/oop2/Tugas/avenger/kamumau/src/java/model/MyConnection.java</file>
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
         </group>
     </open-files>
 </project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/avenger-master/kamumau/src/java/model/TestModel.java</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/controller/OrdersController.java</file>
+            <file>file:/E:/avenger-master/kamumau/web/people/new.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/products/form.html</file>
+            <file>file:/E:/avenger-master/kamumau/web/products/new.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/products/list.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/model/Person.java</file>
+            <file>file:/E:/avenger-master/kamumau/web/people/list.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/model/Product.java</file>
+            <file>file:/E:/avenger-master/kamumau/web/WEB-INF/stylesheets/jumbotron.css</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/controller/ProductsController.java</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/model/Category.java</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/model/MyConnection.java</file>
+            <file>file:/E:/avenger-master/kamumau/web/layouts/header.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/products/edit.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/controller/PeopleController.java</file>
+            <file>file:/E:/avenger-master/kamumau/web/people/edit.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/people/form.html</file>
+            <file>file:/E:/avenger-master/kamumau/web/WEB-INF/web.xml</file>
+            <file>file:/E:/avenger-master/kamumau/web/layouts/navbar_logged_in.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/layouts/navbar_not_logged_in.jsp</file>
+            <file>file:/E:/avenger-master/kamumau/web/index.html</file>
+            <file>file:/E:/avenger-master/kamumau/src/java/controller/CategoriesController.java</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> 0e273152806811b23737656b42cf55d2fbf314c1

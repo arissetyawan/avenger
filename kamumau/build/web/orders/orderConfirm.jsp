@@ -13,7 +13,10 @@
     <hr>
     <hr>
     <br>
+<<<<<<< HEAD
     
+=======
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     <div class="row">
         <div class="container">
             <div style="float: right;">

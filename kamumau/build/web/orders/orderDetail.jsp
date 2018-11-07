@@ -1,5 +1,9 @@
 <%-- 
+<<<<<<< HEAD
     Document   : orderDetail
+=======
+    Document   : orderConfirm
+>>>>>>> 2af7e0e9ff9a30b510bed6c243a915e9262afde3
     Created on : 15 Okt 18, 11:19:47
     Author     : atfal
 --%>
